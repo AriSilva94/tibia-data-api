@@ -26,6 +26,21 @@ async function main() {
   });
 
   console.log(`Admin user created: ${email}`);
+
+  const calmeraExists = await prisma.world.findUnique({ where: { name: 'Calmera' } });
+  if (!calmeraExists) {
+    await prisma.world.create({
+      data: {
+        name: 'Calmera',
+        region: 'South America',
+        pvpType: 'Open PvP',
+        isTracked: true,
+      },
+    });
+    console.log('World Calmera created');
+  } else {
+    console.log('World Calmera already exists');
+  }
 }
 
 main()
