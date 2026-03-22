@@ -1,11 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { PrismaService } from '../../prisma/prisma.service';
 import { CharacterListQueryDto } from './dto/character-list-query.dto';
 import { CharacterProfileResponseDto } from './dto/character-profile-response.dto';
 import { CharacterResponseDto } from './dto/character-response.dto';
+import { SnapshotsQueryDto } from './dto/snapshots-query.dto';
+import { SnapshotsResponseDto } from './dto/snapshots-response.dto';
 
 const ONLINE_THRESHOLD_MS = 30 * 60 * 1000; // 30 minutes
+
+// Tibia character names are stored in title-case. Normalizing the input
+// ensures case-insensitive lookup works correctly on SQLite (no native support).
+function toTitleCase(name: string): string {
+  return name
+    .trim()
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
 
 @Injectable()
 export class CharactersService {
@@ -89,7 +101,7 @@ export class CharactersService {
 
   async findByName(name: string) {
     const character = await this.prisma.character.findFirst({
-      where: { name: { equals: name } },
+      where: { name: { equals: toTitleCase(name) } },
       select: {
         id: true,
         name: true,
@@ -134,6 +146,48 @@ export class CharactersService {
         isConfirmedWorld: character.isConfirmedWorld,
         discoverySource: character.discoverySource,
       },
+      { excludeExtraneousValues: true },
+    );
+  }
+
+  async getSnapshots(name: string, filters: SnapshotsQueryDto) {
+    const { from, to, limit = 100 } = filters;
+
+    const character = await this.prisma.character.findFirst({
+      where: { name: { equals: toTitleCase(name) } },
+      select: { id: true, name: true, world: true },
+    });
+
+    if (!character) {
+      throw new NotFoundException(`Character "${name}" not found`);
+    }
+
+    if (from && to && from > to) {
+      throw new BadRequestException('from must be before or equal to to');
+    }
+
+    const where: Record<string, unknown> = { characterId: character.id };
+
+    if (from) where.collectedAt = { ...(where.collectedAt as object), gte: new Date(from) };
+    if (to) where.collectedAt = { ...(where.collectedAt as object), lte: new Date(to) };
+
+    const snapshots = await this.prisma.characterSnapshot.findMany({
+      where,
+      orderBy: { collectedAt: 'desc' },
+      take: limit,
+      select: {
+        collectedAt: true,
+        level: true,
+        experience: true,
+        vocation: true,
+        guildName: true,
+        sourceType: true,
+      },
+    });
+
+    return plainToInstance(
+      SnapshotsResponseDto,
+      { characterName: character.name, world: character.world, snapshots },
       { excludeExtraneousValues: true },
     );
   }
