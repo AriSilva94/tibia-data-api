@@ -14,7 +14,7 @@ export class HighscoresService {
     const { world, category, page = 1 } = query;
 
     // Find the most recent collectedAt for this world+category+page combination
-    const latest = await this.prisma.highscoresSnapshot.findFirst({
+    const latest = await this.prisma.highscoreSnapshot.findFirst({
       where: { world, category, page },
       orderBy: { collectedAt: 'desc' },
       select: { collectedAt: true },
@@ -26,7 +26,7 @@ export class HighscoresService {
       );
     }
 
-    const entries = await this.prisma.highscoresSnapshot.findMany({
+    const entries = await this.prisma.highscoreSnapshot.findMany({
       where: {
         world,
         category,

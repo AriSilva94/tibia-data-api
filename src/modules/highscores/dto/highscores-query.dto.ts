@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsIn, IsInt, IsNotEmpty, IsOptional, Min } from 'class-validator';
+import { IsIn, IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
 
 export const VALID_HIGHSCORE_CATEGORIES = [
   'experience',
