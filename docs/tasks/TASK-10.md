@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-08 |
 
 ---
@@ -17,7 +17,7 @@ Adicionar o endpoint de XP diário ao módulo de personagens. Os dados são serv
 
 ## Acceptance Criteria
 
-- [ ] **`GET /api/v1/characters/:name/xp`** (protegido):
+- [x] **`GET /api/v1/characters/:name/xp`** (protegido):
   - Retorna métricas diárias de XP do personagem
   - Suporta query params:
     - `from` — data inicial (YYYY-MM-DD)
@@ -46,8 +46,8 @@ Adicionar o endpoint de XP diário ao módulo de personagens. Os dados são serv
     ```
   - Ordenação: `date DESC`
 
-- [ ] `CharactersService.getDailyXp(name, filters)` implementado
-- [ ] DTO de query e resposta tipados
+- [x] `CharactersService.getDailyXp(name, filters)` implementado
+- [x] DTO de query e resposta tipados
 
 ---
 

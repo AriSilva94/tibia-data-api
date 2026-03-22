@@ -144,6 +144,25 @@
               ]
             }
           }
+        },
+        {
+          "name": "Get Character Daily XP",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters/Eternal Oblivion/xp?limit=30",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters", "Eternal Oblivion", "xp"],
+              "query": [
+                { "key": "limit", "value": "30" },
+                { "key": "from", "value": "2026-03-01", "disabled": true },
+                { "key": "to", "value": "2026-03-22", "disabled": true }
+              ]
+            }
+          }
         }
       ]
     }

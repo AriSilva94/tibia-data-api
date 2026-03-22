@@ -4,6 +4,8 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { CharacterListQueryDto } from './dto/character-list-query.dto';
 import { CharacterProfileResponseDto } from './dto/character-profile-response.dto';
 import { CharacterResponseDto } from './dto/character-response.dto';
+import { DailyXpQueryDto } from './dto/daily-xp-query.dto';
+import { DailyXpResponseDto } from './dto/daily-xp-response.dto';
 import { SnapshotsQueryDto } from './dto/snapshots-query.dto';
 import { SnapshotsResponseDto } from './dto/snapshots-response.dto';
 
@@ -188,6 +190,49 @@ export class CharactersService {
     return plainToInstance(
       SnapshotsResponseDto,
       { characterName: character.name, world: character.world, snapshots },
+      { excludeExtraneousValues: true },
+    );
+  }
+
+  async getDailyXp(name: string, filters: DailyXpQueryDto) {
+    const { from, to, limit = 30 } = filters;
+
+    const character = await this.prisma.character.findFirst({
+      where: { name: { equals: toTitleCase(name) } },
+      select: { id: true, name: true, world: true },
+    });
+
+    if (!character) {
+      throw new NotFoundException(`Character "${name}" not found`);
+    }
+
+    if (from && to && from > to) {
+      throw new BadRequestException('from must be before or equal to to');
+    }
+
+    const where: Record<string, unknown> = { characterId: character.id };
+    if (from) where.date = { ...(where.date as object), gte: from };
+    if (to) where.date = { ...(where.date as object), lte: to };
+
+    const metrics = await this.prisma.characterDailyMetric.findMany({
+      where,
+      orderBy: { date: 'desc' },
+      take: limit,
+      select: {
+        date: true,
+        expGained: true,
+        expStart: true,
+        expEnd: true,
+        levelStart: true,
+        levelEnd: true,
+        levelsGained: true,
+        deathsCount: true,
+      },
+    });
+
+    return plainToInstance(
+      DailyXpResponseDto,
+      { characterName: character.name, world: character.world, metrics },
       { excludeExtraneousValues: true },
     );
   }
