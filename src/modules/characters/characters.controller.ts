@@ -2,6 +2,7 @@ import { Controller, Get, Param, Query } from '@nestjs/common';
 import { CharactersService } from './characters.service';
 import { CharacterListQueryDto } from './dto/character-list-query.dto';
 import { DailyXpQueryDto } from './dto/daily-xp-query.dto';
+import { DeathsQueryDto } from './dto/deaths-query.dto';
 import { SnapshotsQueryDto } from './dto/snapshots-query.dto';
 
 @Controller('characters')
@@ -21,6 +22,11 @@ export class CharactersController {
   @Get(':name/xp')
   getDailyXp(@Param('name') name: string, @Query() query: DailyXpQueryDto) {
     return this.charactersService.getDailyXp(name, query);
+  }
+
+  @Get(':name/deaths')
+  getDeaths(@Param('name') name: string, @Query() query: DeathsQueryDto) {
+    return this.charactersService.getDeaths(name, query);
   }
 
   @Get(':name')

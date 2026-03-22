@@ -17,6 +17,6 @@ export class DailyXpQueryDto {
   @IsInt()
   @Min(1)
   @Max(90)
-  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : value))
+  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : 30))
   limit?: number = 30;
 }

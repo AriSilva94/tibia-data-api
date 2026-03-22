@@ -45,7 +45,7 @@
 | [TASK-08](tasks/TASK-08.md) | Characters Module — List & Profile | M | Done | TASK-02, TASK-06 |
 | [TASK-09](tasks/TASK-09.md) | Characters Module — Snapshots Endpoint | S | Done | TASK-08 |
 | [TASK-10](tasks/TASK-10.md) | Characters Module — Daily XP Endpoint | S | Done | TASK-08 |
-| [TASK-11](tasks/TASK-11.md) | Characters Module — Deaths Endpoint | S | Todo | TASK-08 |
+| [TASK-11](tasks/TASK-11.md) | Characters Module — Deaths Endpoint | S | Done | TASK-08 |
 | [TASK-12](tasks/TASK-12.md) | Highscores Module — API Endpoints | S | Todo | TASK-02, TASK-06 |
 
 ### E4 — Collector Layer

@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-08 |
 
 ---
@@ -17,7 +17,7 @@ Adicionar o endpoint de mortes ao módulo de personagens. Os dados são servidos
 
 ## Acceptance Criteria
 
-- [ ] **`GET /api/v1/characters/:name/deaths`** (protegido):
+- [x] **`GET /api/v1/characters/:name/deaths`** (protegido):
   - Retorna histórico de mortes do personagem
   - Suporta query params:
     - `from` — data inicial (ISO 8601)
@@ -42,8 +42,8 @@ Adicionar o endpoint de mortes ao módulo de personagens. Os dados são servidos
     ```
   - Ordenação: `deathAt DESC`
 
-- [ ] `CharactersService.getDeaths(name, filters)` implementado
-- [ ] DTO de query e resposta tipados
+- [x] `CharactersService.getDeaths(name, filters)` implementado
+- [x] DTO de query e resposta tipados
 
 ---
 

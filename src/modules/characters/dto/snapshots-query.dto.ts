@@ -14,6 +14,6 @@ export class SnapshotsQueryDto {
   @IsInt()
   @Min(1)
   @Max(500)
-  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : value))
+  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : 100))
   limit?: number = 100;
 }

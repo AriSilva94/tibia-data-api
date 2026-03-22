@@ -22,13 +22,13 @@ export class CharacterListQueryDto {
   @IsOptional()
   @IsInt()
   @Min(1)
-  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : value))
+  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : 1))
   page?: number = 1;
 
   @IsOptional()
   @IsInt()
   @Min(1)
   @Max(100)
-  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : value))
+  @Transform(({ value }) => (value !== undefined ? parseInt(value, 10) : 50))
   limit?: number = 50;
 }

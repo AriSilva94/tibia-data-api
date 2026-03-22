@@ -6,6 +6,8 @@ import { CharacterProfileResponseDto } from './dto/character-profile-response.dt
 import { CharacterResponseDto } from './dto/character-response.dto';
 import { DailyXpQueryDto } from './dto/daily-xp-query.dto';
 import { DailyXpResponseDto } from './dto/daily-xp-response.dto';
+import { DeathsQueryDto } from './dto/deaths-query.dto';
+import { DeathsResponseDto } from './dto/deaths-response.dto';
 import { SnapshotsQueryDto } from './dto/snapshots-query.dto';
 import { SnapshotsResponseDto } from './dto/snapshots-response.dto';
 
@@ -233,6 +235,45 @@ export class CharactersService {
     return plainToInstance(
       DailyXpResponseDto,
       { characterName: character.name, world: character.world, metrics },
+      { excludeExtraneousValues: true },
+    );
+  }
+
+  async getDeaths(name: string, filters: DeathsQueryDto) {
+    const { from, to, limit = 50 } = filters;
+
+    const character = await this.prisma.character.findFirst({
+      where: { name: { equals: toTitleCase(name) } },
+      select: { id: true, name: true, world: true },
+    });
+
+    if (!character) {
+      throw new NotFoundException(`Character "${name}" not found`);
+    }
+
+    if (from && to && new Date(from) > new Date(to)) {
+      throw new BadRequestException('from must be before or equal to to');
+    }
+
+    const where: Record<string, unknown> = { characterId: character.id };
+    if (from) where.deathAt = { ...(where.deathAt as object), gte: new Date(from) };
+    if (to) where.deathAt = { ...(where.deathAt as object), lte: new Date(to) };
+
+    const deaths = await this.prisma.characterDeath.findMany({
+      where,
+      orderBy: { deathAt: 'desc' },
+      take: limit,
+      select: {
+        deathAt: true,
+        level: true,
+        killersRaw: true,
+        collectedAt: true,
+      },
+    });
+
+    return plainToInstance(
+      DeathsResponseDto,
+      { characterName: character.name, world: character.world, deaths },
       { excludeExtraneousValues: true },
     );
   }
