@@ -22,12 +22,7 @@ export class ResponseInterceptor<T>
   ): Observable<ResponseEnvelope<T>> {
     return next.handle().pipe(
       map((data) => {
-        if (
-          data !== null &&
-          typeof data === 'object' &&
-          'data' in (data as object) &&
-          'meta' in (data as object)
-        ) {
+        if (data !== null && typeof data === 'object' && 'data' in (data as object)) {
           return data as unknown as ResponseEnvelope<T>;
         }
 

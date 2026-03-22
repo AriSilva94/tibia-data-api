@@ -144,7 +144,6 @@ model CharacterDeath {
 
   character Character @relation(fields: [characterId], references: [id])
 
-  @@index([dedupeHash])
   @@map("character_deaths")
 }
 
@@ -173,8 +172,7 @@ model OnlinePlayerSnapshot {
   vocation      String?
   createdAt     DateTime @default(now())
 
-  @@index([world])
-  @@index([collectedAt])
+  @@index([world, collectedAt])
   @@map("online_players_snapshots")
 }
 

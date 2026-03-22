@@ -5,5 +5,5 @@ export function sha256(input: string): string {
 }
 
 export function buildDedupeHash(parts: (string | number)[]): string {
-  return sha256(parts.map(String).join('|'));
+  return sha256(parts.map(String).join('\x00'));
 }
