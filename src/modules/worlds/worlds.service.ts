@@ -1,5 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 import { PrismaService } from '../../prisma/prisma.service';
+import { WorldOnlineResponseDto } from './dto/world-online-response.dto';
+import { WorldResponseDto } from './dto/world-response.dto';
 
 const STALE_THRESHOLD_MS = 30 * 60 * 1000; // 30 minutes
 
@@ -8,7 +11,7 @@ export class WorldsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllTracked() {
-    return this.prisma.world.findMany({
+    const worlds = await this.prisma.world.findMany({
       where: { isTracked: true },
       select: {
         id: true,
@@ -20,11 +23,13 @@ export class WorldsService {
         createdAt: true,
       },
     });
+
+    return plainToInstance(WorldResponseDto, worlds);
   }
 
   async findByName(name: string) {
-    const world = await this.prisma.world.findFirst({
-      where: { name: { equals: name } },
+    const world = await this.prisma.world.findUnique({
+      where: { name },
       select: {
         id: true,
         name: true,
@@ -40,7 +45,7 @@ export class WorldsService {
       throw new NotFoundException(`World "${name}" not found`);
     }
 
-    return world;
+    return plainToInstance(WorldResponseDto, world);
   }
 
   async getOnlineSnapshot(name: string) {
@@ -78,12 +83,12 @@ export class WorldsService {
     const isStale =
       Date.now() - latestSnapshot.collectedAt.getTime() > STALE_THRESHOLD_MS;
 
-    return {
+    return plainToInstance(WorldOnlineResponseDto, {
       world: world.name,
       collectedAt: latestSnapshot.collectedAt,
       isStale,
       onlineCount: latestSnapshot.onlineCount,
       players,
-    };
+    });
   }
 }
