@@ -1,0 +1,215 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ─────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────
+// WORLDS
+// ─────────────────────────────────────────────
+
+model World {
+  id              Int      @id @default(autoincrement())
+  name            String   @unique
+  region          String?
+  pvpType         String?
+  creationDate    String?
+  isTracked       Boolean  @default(false)
+  lastOnlineCount Int?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("worlds")
+}
+
+// ─────────────────────────────────────────────
+// CHARACTERS
+// ─────────────────────────────────────────────
+
+model Character {
+  id                 Int      @id @default(autoincrement())
+  name               String
+  world              String
+  isConfirmedWorld   Boolean  @default(false)
+  discoverySource    String?
+  firstSeenAt        DateTime @default(now())
+  lastSeenAt         DateTime?
+  lastSeenOnlineAt   DateTime?
+  lastProfileScanAt  DateTime?
+  isActiveCandidate  Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  profile      CharacterProfile?
+  snapshots    CharacterSnapshot[]
+  dailyMetrics CharacterDailyMetric[]
+  deaths       CharacterDeath[]
+
+  @@unique([name, world])
+  @@index([name])
+  @@index([world])
+  @@map("characters")
+}
+
+model CharacterProfile {
+  id               Int      @id @default(autoincrement())
+  characterId      Int      @unique
+  world            String
+  level            Int?
+  experience       BigInt?
+  vocation         String?
+  guildName        String?
+  residence        String?
+  sex              String?
+  formerNamesRaw   String?
+  accountStatusRaw String?
+  lastFetchedAt    DateTime @default(now())
+
+  character Character @relation(fields: [characterId], references: [id])
+
+  @@map("character_profiles")
+}
+
+model CharacterSnapshot {
+  id           Int      @id @default(autoincrement())
+  characterId  Int
+  world        String
+  collectedAt  DateTime @default(now())
+  level        Int?
+  experience   BigInt?
+  vocation     String?
+  guildName    String?
+  statusOnline Boolean  @default(false)
+  sourceType   String?
+  createdAt    DateTime @default(now())
+
+  character Character @relation(fields: [characterId], references: [id])
+
+  @@index([characterId])
+  @@index([collectedAt])
+  @@map("character_snapshots")
+}
+
+model CharacterDailyMetric {
+  id           Int      @id @default(autoincrement())
+  characterId  Int
+  world        String
+  date         String
+  expStart     BigInt?
+  expEnd       BigInt?
+  expGained    BigInt?
+  levelStart   Int?
+  levelEnd     Int?
+  levelsGained Int?
+  deathsCount  Int      @default(0)
+  updatedAt    DateTime @updatedAt
+
+  character Character @relation(fields: [characterId], references: [id])
+
+  @@unique([characterId, date])
+  @@map("character_daily_metrics")
+}
+
+model CharacterDeath {
+  id          Int      @id @default(autoincrement())
+  characterId Int
+  world       String
+  deathAt     DateTime
+  level       Int?
+  killersRaw  String?
+  dedupeHash  String   @unique
+  collectedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  character Character @relation(fields: [characterId], references: [id])
+
+  @@index([dedupeHash])
+  @@map("character_deaths")
+}
+
+// ─────────────────────────────────────────────
+// ONLINE SNAPSHOTS
+// ─────────────────────────────────────────────
+
+model OnlineWorldSnapshot {
+  id          Int      @id @default(autoincrement())
+  world       String
+  collectedAt DateTime @default(now())
+  onlineCount Int
+  createdAt   DateTime @default(now())
+
+  @@index([world])
+  @@index([collectedAt])
+  @@map("online_world_snapshots")
+}
+
+model OnlinePlayerSnapshot {
+  id            Int      @id @default(autoincrement())
+  world         String
+  collectedAt   DateTime @default(now())
+  characterName String
+  level         Int?
+  vocation      String?
+  createdAt     DateTime @default(now())
+
+  @@index([world])
+  @@index([collectedAt])
+  @@map("online_players_snapshots")
+}
+
+// ─────────────────────────────────────────────
+// HIGHSCORES
+// ─────────────────────────────────────────────
+
+model HighscoreSnapshot {
+  id            Int      @id @default(autoincrement())
+  world         String
+  category      String
+  page          Int
+  rank          Int
+  characterName String
+  vocation      String?
+  value         BigInt?
+  collectedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+
+  @@index([world])
+  @@index([collectedAt])
+  @@map("highscores_snapshots")
+}
+
+// ─────────────────────────────────────────────
+// DISCOVERY
+// ─────────────────────────────────────────────
+
+model DiscoveryEdge {
+  id            Int      @id @default(autoincrement())
+  world         String
+  sourceType    String
+  sourceKey     String
+  characterName String
+  createdAt     DateTime @default(now())
+
+  @@map("discovery_edges")
+}
