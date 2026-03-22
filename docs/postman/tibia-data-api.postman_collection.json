@@ -1,0 +1,213 @@
+{
+  "info": {
+    "name": "Tibia Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const res = pm.response.json();",
+                  "if (res.data && res.data.accessToken) {",
+                  "  pm.collectionVariables.set('token', res.data.accessToken);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@tibia-api.local\",\n  \"password\": \"Admin@12345\"\n}"
+            },
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Me",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Worlds",
+      "item": [
+        {
+          "name": "List Worlds",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/worlds"
+          }
+        },
+        {
+          "name": "Get World by Name",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/worlds/Calmera"
+          }
+        },
+        {
+          "name": "Get World Online Snapshot",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/worlds/Calmera/online"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Characters",
+      "item": [
+        {
+          "name": "List Characters",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters?page=1&limit=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters"],
+              "query": [
+                { "key": "page", "value": "1" },
+                { "key": "limit", "value": "50" },
+                { "key": "world", "value": "Calmera", "disabled": true },
+                { "key": "name", "value": "", "disabled": true },
+                { "key": "isOnline", "value": "true", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Character by Name",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/characters/Eternal Oblivion"
+          }
+        },
+        {
+          "name": "Get Character Snapshots",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters/Eternal Oblivion/snapshots?limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters", "Eternal Oblivion", "snapshots"],
+              "query": [
+                { "key": "limit", "value": "100" },
+                { "key": "from", "value": "2026-03-01T00:00:00Z", "disabled": true },
+                { "key": "to", "value": "2026-03-22T23:59:59Z", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Character Deaths",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters/Eternal Oblivion/deaths?limit=50",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters", "Eternal Oblivion", "deaths"],
+              "query": [
+                { "key": "limit", "value": "50" },
+                { "key": "from", "value": "2026-03-01T00:00:00Z", "disabled": true },
+                { "key": "to", "value": "2026-03-22T23:59:59Z", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Character Daily XP",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters/Eternal Oblivion/xp?limit=30",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters", "Eternal Oblivion", "xp"],
+              "query": [
+                { "key": "limit", "value": "30" },
+                { "key": "from", "value": "2026-03-01", "disabled": true },
+                { "key": "to", "value": "2026-03-22", "disabled": true }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Highscores",
+      "item": [
+        {
+          "name": "Get Highscores",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/highscores?world=Calmera&category=experience&page=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["highscores"],
+              "query": [
+                { "key": "world", "value": "Calmera" },
+                { "key": "category", "value": "experience" },
+                { "key": "page", "value": "1" }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-08 |
 
 ---
@@ -17,7 +17,7 @@ Adicionar o endpoint de snapshots históricos ao módulo de personagens. Permite
 
 ## Acceptance Criteria
 
-- [ ] **`GET /api/v1/characters/:name/snapshots`** (protegido):
+- [x] **`GET /api/v1/characters/:name/snapshots`** (protegido):
   - Retorna snapshots históricos do personagem
   - Suporta query params:
     - `from` — data inicial (ISO 8601)
@@ -27,8 +27,8 @@ Adicionar o endpoint de snapshots históricos ao módulo de personagens. Permite
   - Resposta: `{ characterName, world, snapshots: [{ collectedAt, level, experience, vocation, guildName, sourceType }] }`
   - Ordenação: `collectedAt DESC`
 
-- [ ] `CharactersService.getSnapshots(name, filters)` implementado
-- [ ] DTO de query com validações de data e limit
+- [x] `CharactersService.getSnapshots(name, filters)` implementado
+- [x] DTO de query com validações de data e limit
 
 ---
 

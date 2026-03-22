@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-02, TASK-06 |
 
 ---
@@ -17,20 +17,20 @@ Implementar os endpoints de leitura do módulo de mundos. Todos os dados são se
 
 ## Acceptance Criteria
 
-- [ ] `WorldsModule` criado e registrado no `AppModule`
-- [ ] **`GET /api/v1/worlds`** (protegido):
+- [x] `WorldsModule` criado e registrado no `AppModule`
+- [x] **`GET /api/v1/worlds`** (protegido):
   - Lista todos os mundos onde `isTracked = true`
   - Retorna: `{ id, name, region, pvpType, isTracked, lastOnlineCount, createdAt }`
-- [ ] **`GET /api/v1/worlds/:name`** (protegido):
+- [x] **`GET /api/v1/worlds/:name`** (protegido):
   - Retorna dados de um mundo específico por nome
   - Retorna `404` se não encontrado
-- [ ] **`GET /api/v1/worlds/:name/online`** (protegido):
+- [x] **`GET /api/v1/worlds/:name/online`** (protegido):
   - Retorna o último snapshot de jogadores online do mundo
   - Resposta inclui: `{ world, collectedAt, isStale, onlineCount, players: [{ characterName, level, vocation }] }`
   - `isStale = true` se `collectedAt` for mais antigo que 30 minutos
   - Retorna `404` se nenhum snapshot encontrado
-- [ ] DTOs de resposta tipados com `class-transformer`
-- [ ] `WorldsService` com métodos internos para cada query
+- [x] DTOs de resposta tipados com `class-transformer`
+- [x] `WorldsService` com métodos internos para cada query
 
 ---
 

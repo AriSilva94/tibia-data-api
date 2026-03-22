@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | M |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-02, TASK-06 |
 
 ---
@@ -17,8 +17,8 @@ Implementar os endpoints base do módulo de personagens: listagem com filtros e 
 
 ## Acceptance Criteria
 
-- [ ] `CharactersModule` criado e registrado no `AppModule`
-- [ ] **`GET /api/v1/characters`** (protegido):
+- [x] `CharactersModule` criado e registrado no `AppModule`
+- [x] **`GET /api/v1/characters`** (protegido):
   - Lista personagens indexados
   - Suporta query params:
     - `world` — filtra por mundo
@@ -28,17 +28,17 @@ Implementar os endpoints base do módulo de personagens: listagem com filtros e 
   - Resposta: `{ data: [...], meta: { total, page, limit, totalPages } }`
   - Cada item: `{ id, name, world, level, vocation, lastSeenAt, lastSeenOnlineAt, isConfirmedWorld }`
 
-- [ ] **`GET /api/v1/characters/:name`** (protegido):
+- [x] **`GET /api/v1/characters/:name`** (protegido):
   - Busca personagem por nome (case-insensitive)
   - Retorna dados do `characters` + `character_profiles` em join
   - Retorna `404` se não encontrado
   - Resposta: `{ id, name, world, level, experience, vocation, guildName, residence, sex, lastFetchedAt, lastSeenAt, lastSeenOnlineAt, isConfirmedWorld, discoverySource }`
 
-- [ ] `CharactersService` com métodos:
+- [x] `CharactersService` com métodos:
   - `findAll(filters)` — query com paginação
   - `findByName(name)` — busca case-insensitive
 
-- [ ] DTOs de resposta e query tipados
+- [x] DTOs de resposta e query tipados
 
 ---
 

@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E3 — Core API Modules |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-02, TASK-06 |
 
 ---
@@ -17,8 +17,8 @@ Implementar os endpoints de leitura do módulo de highscores. Expõe os rankings
 
 ## Acceptance Criteria
 
-- [ ] `HighscoresModule` criado e registrado no `AppModule`
-- [ ] **`GET /api/v1/highscores`** (protegido):
+- [x] `HighscoresModule` criado e registrado no `AppModule`
+- [x] **`GET /api/v1/highscores`** (protegido):
   - Suporta query params:
     - `world` — obrigatório
     - `category` — categoria do ranking (ex: `experience`, `magic`, `sword`, etc.)
@@ -32,14 +32,14 @@ Implementar os endpoints de leitura do módulo de highscores. Expõe os rankings
       "collectedAt": "...",
       "isStale": false,
       "entries": [
-        { "rank": 1, "characterName": "...", "vocation": "...", "value": 123456789 }
+        { "rank": 1, "characterName": "...", "vocation": "...", "value": "123456789" }
       ]
     }
     ```
   - `isStale = true` se `collectedAt` mais antigo que 24h
   - Retorna `404` se nenhum snapshot para os filtros
 
-- [ ] `HighscoresService` com query interna eficiente (buscar o `collectedAt` mais recente para world+category+page)
+- [x] `HighscoresService` com query interna eficiente (buscar o `collectedAt` mais recente para world+category+page)
 
 ---
 

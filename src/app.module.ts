@@ -8,6 +8,8 @@ import { scheduleConfig } from './config/schedule.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { UsersModule } from './modules/users/users.module';
+import { CharactersModule } from './modules/characters/characters.module';
+import { HighscoresModule } from './modules/highscores/highscores.module';
 import { WorldsModule } from './modules/worlds/worlds.module';
 import { PrismaModule } from './prisma/prisma.module';
 
@@ -21,6 +23,8 @@ import { PrismaModule } from './prisma/prisma.module';
     UsersModule,
     AuthModule,
     WorldsModule,
+    CharactersModule,
+    HighscoresModule,
   ],
   controllers: [],
   providers: [
