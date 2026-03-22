@@ -184,6 +184,30 @@
           }
         }
       ]
+    },
+    {
+      "name": "Highscores",
+      "item": [
+        {
+          "name": "Get Highscores",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/highscores?world=Calmera&category=experience&page=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["highscores"],
+              "query": [
+                { "key": "world", "value": "Calmera" },
+                { "key": "category", "value": "experience" },
+                { "key": "page", "value": "1" }
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
