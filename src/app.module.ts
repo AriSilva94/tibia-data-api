@@ -8,6 +8,7 @@ import { scheduleConfig } from './config/schedule.config';
 import { AuthModule } from './modules/auth/auth.module';
 import { JwtAuthGuard } from './modules/auth/guards/jwt-auth.guard';
 import { UsersModule } from './modules/users/users.module';
+import { WorldsModule } from './modules/worlds/worlds.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -19,6 +20,7 @@ import { PrismaModule } from './prisma/prisma.module';
     PrismaModule,
     UsersModule,
     AuthModule,
+    WorldsModule,
   ],
   controllers: [],
   providers: [
