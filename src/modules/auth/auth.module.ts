@@ -14,9 +14,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('auth.jwtSecret'),
+        secret: configService.get<string>('auth.jwtSecret', ''),
         signOptions: {
-          expiresIn: configService.get<string>('auth.jwtExpiresIn'),
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          expiresIn: configService.get<string>('auth.jwtExpiresIn', '7d') as any,
         },
       }),
     }),
