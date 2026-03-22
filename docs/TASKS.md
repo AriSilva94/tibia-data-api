@@ -41,8 +41,8 @@
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-07](tasks/TASK-07.md) | Worlds Module — API Endpoints | S | Todo | TASK-02, TASK-06 |
-| [TASK-08](tasks/TASK-08.md) | Characters Module — List & Profile | M | Todo | TASK-02, TASK-06 |
+| [TASK-07](tasks/TASK-07.md) | Worlds Module — API Endpoints | S | Done | TASK-02, TASK-06 |
+| [TASK-08](tasks/TASK-08.md) | Characters Module — List & Profile | M | Done | TASK-02, TASK-06 |
 | [TASK-09](tasks/TASK-09.md) | Characters Module — Snapshots Endpoint | S | Todo | TASK-08 |
 | [TASK-10](tasks/TASK-10.md) | Characters Module — Daily XP Endpoint | S | Todo | TASK-08 |
 | [TASK-11](tasks/TASK-11.md) | Characters Module — Deaths Endpoint | S | Todo | TASK-08 |

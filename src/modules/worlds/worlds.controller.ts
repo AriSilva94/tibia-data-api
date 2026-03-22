@@ -1,15 +1,6 @@
-import {
-  Controller,
-  Get,
-  Param,
-  SerializeOptions,
-  UseInterceptors,
-} from '@nestjs/common';
-import { ClassSerializerInterceptor } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { WorldsService } from './worlds.service';
 
-@UseInterceptors(ClassSerializerInterceptor)
-@SerializeOptions({ excludeExtraneousValues: true })
 @Controller('worlds')
 export class WorldsController {
   constructor(private readonly worldsService: WorldsService) {}

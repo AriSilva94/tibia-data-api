@@ -24,7 +24,7 @@ export class WorldsService {
       },
     });
 
-    return plainToInstance(WorldResponseDto, worlds);
+    return plainToInstance(WorldResponseDto, worlds, { excludeExtraneousValues: true });
   }
 
   async findByName(name: string) {
@@ -45,7 +45,7 @@ export class WorldsService {
       throw new NotFoundException(`World "${name}" not found`);
     }
 
-    return plainToInstance(WorldResponseDto, world);
+    return plainToInstance(WorldResponseDto, world, { excludeExtraneousValues: true });
   }
 
   async getOnlineSnapshot(name: string) {
@@ -83,12 +83,16 @@ export class WorldsService {
     const isStale =
       Date.now() - latestSnapshot.collectedAt.getTime() > STALE_THRESHOLD_MS;
 
-    return plainToInstance(WorldOnlineResponseDto, {
-      world: world.name,
-      collectedAt: latestSnapshot.collectedAt,
-      isStale,
-      onlineCount: latestSnapshot.onlineCount,
-      players,
-    });
+    return plainToInstance(
+      WorldOnlineResponseDto,
+      {
+        world: world.name,
+        collectedAt: latestSnapshot.collectedAt,
+        isStale,
+        onlineCount: latestSnapshot.onlineCount,
+        players,
+      },
+      { excludeExtraneousValues: true },
+    );
   }
 }
