@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E1 — Project Foundation |
 | Size | S |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-01 |
 
 ---

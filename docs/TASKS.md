@@ -25,17 +25,17 @@
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-01](tasks/TASK-01.md) | Project Bootstrap | S | Todo | — |
-| [TASK-02](tasks/TASK-02.md) | Prisma Schema — All Tables | M | Todo | TASK-01 |
-| [TASK-03](tasks/TASK-03.md) | Global Config Module | S | Todo | TASK-01 |
-| [TASK-04](tasks/TASK-04.md) | Common Infrastructure | M | Todo | TASK-01 |
+| [TASK-01](tasks/TASK-01.md) | Project Bootstrap | S | Done | — |
+| [TASK-02](tasks/TASK-02.md) | Prisma Schema — All Tables | M | Done | TASK-01 |
+| [TASK-03](tasks/TASK-03.md) | Global Config Module | S | Done | TASK-01 |
+| [TASK-04](tasks/TASK-04.md) | Common Infrastructure | M | Done | TASK-01 |
 
 ### E2 — Authentication & Users
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-05](tasks/TASK-05.md) | Users Module | S | Todo | TASK-02, TASK-03 |
-| [TASK-06](tasks/TASK-06.md) | Auth Module (JWT) | M | Todo | TASK-05 |
+| [TASK-05](tasks/TASK-05.md) | Users Module | S | Done | TASK-02, TASK-03 |
+| [TASK-06](tasks/TASK-06.md) | Auth Module (JWT) | M | Done | TASK-05 |
 
 ### E3 — Core API Modules
 
