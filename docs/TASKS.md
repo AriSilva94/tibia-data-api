@@ -62,7 +62,7 @@
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-18](tasks/TASK-18.md) | Discovery Module & Reconciliation Service | M | Todo | TASK-15, TASK-16, TASK-17 |
+| [TASK-18](tasks/TASK-18.md) | Discovery Module & Reconciliation Service | M | Done | TASK-15, TASK-16, TASK-17 |
 
 ### E6 — Background Jobs
 

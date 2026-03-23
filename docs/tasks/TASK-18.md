@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E5 — Discovery System |
 | Size | M |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-15, TASK-16, TASK-17 |
 
 ---

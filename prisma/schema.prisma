@@ -69,6 +69,7 @@ model Character {
   @@unique([name, world])
   @@index([name])
   @@index([world])
+  @@index([world, isActiveCandidate, lastProfileScanAt])
   @@map("characters")
 }
 
