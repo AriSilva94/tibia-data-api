@@ -7,6 +7,7 @@ import { WorldOnlineJob } from './jobs/world-online.job';
 import { HighscoresSyncJob } from './jobs/highscores-sync.job';
 import { CharacterRefreshJob } from './jobs/character-refresh.job';
 import { DailyMetricsJob } from './jobs/daily-metrics.job';
+import { DiscoveryReconciliationJob } from './jobs/discovery-reconciliation.job';
 
 @Module({
   imports: [
@@ -15,6 +16,12 @@ import { DailyMetricsJob } from './jobs/daily-metrics.job';
     DiscoveryModule,
     PrismaModule,
   ],
-  providers: [WorldOnlineJob, HighscoresSyncJob, CharacterRefreshJob, DailyMetricsJob],
+  providers: [
+    WorldOnlineJob,
+    HighscoresSyncJob,
+    CharacterRefreshJob,
+    DailyMetricsJob,
+    DiscoveryReconciliationJob,
+  ],
 })
 export class SchedulerModule {}
