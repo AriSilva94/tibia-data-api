@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as cheerio from 'cheerio';
+import type { Element } from 'domhandler';
 import { VocationEnum } from '../../../common/enums/vocation.enum';
 import { buildDedupeHash } from '../../../common/utils/hash.util';
 import { CollectorParseError } from '../collector.errors';
@@ -217,8 +218,8 @@ export class CharacterParser {
   private findTableByHeading(
     $: cheerio.CheerioAPI,
     heading: string,
-  ): cheerio.Cheerio<cheerio.Element> | null {
-    let found: cheerio.Cheerio<cheerio.Element> | null = null;
+  ): cheerio.Cheerio<Element> | null {
+    let found: cheerio.Cheerio<Element> | null = null;
 
     $('table').each((_, table) => {
       const $table = $(table);

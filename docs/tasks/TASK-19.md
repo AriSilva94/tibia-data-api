@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E6 — Background Jobs |
 | Size | M |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-15, TASK-18 |
 
 ---

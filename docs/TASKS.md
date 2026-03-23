@@ -68,11 +68,11 @@
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-19](tasks/TASK-19.md) | Scheduler Setup & World Online Job | M | Todo | TASK-15, TASK-18 |
-| [TASK-20](tasks/TASK-20.md) | Highscores Sync Job | M | Todo | TASK-16, TASK-18 |
-| [TASK-21](tasks/TASK-21.md) | Character Profile Refresh Job | M | Todo | TASK-17, TASK-18 |
-| [TASK-22](tasks/TASK-22.md) | Daily Metrics Calculation Job | M | Todo | TASK-21 |
-| [TASK-23](tasks/TASK-23.md) | Discovery Reconciliation Job | S | Todo | TASK-18, TASK-19, TASK-20 |
+| [TASK-19](tasks/TASK-19.md) | Scheduler Setup & World Online Job | M | Done | TASK-15, TASK-18 |
+| [TASK-20](tasks/TASK-20.md) | Highscores Sync Job | M | Done | TASK-16, TASK-18 |
+| [TASK-21](tasks/TASK-21.md) | Character Profile Refresh Job | M | Done | TASK-17, TASK-18 |
+| [TASK-22](tasks/TASK-22.md) | Daily Metrics Calculation Job | M | Done | TASK-21 |
+| [TASK-23](tasks/TASK-23.md) | Discovery Reconciliation Job | S | Done | TASK-18, TASK-19, TASK-20 |
 
 ### E7 — Health & Security
 
