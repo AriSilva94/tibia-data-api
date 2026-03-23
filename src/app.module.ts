@@ -12,6 +12,7 @@ import { CharactersModule } from './modules/characters/characters.module';
 import { HighscoresModule } from './modules/highscores/highscores.module';
 import { WorldsModule } from './modules/worlds/worlds.module';
 import { DiscoveryModule } from './modules/discovery/discovery.module';
+import { SchedulerModule } from './modules/scheduler/scheduler.module';
 import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
@@ -27,6 +28,7 @@ import { PrismaModule } from './prisma/prisma.module';
     CharactersModule,
     HighscoresModule,
     DiscoveryModule,
+    SchedulerModule,
   ],
   controllers: [],
   providers: [
