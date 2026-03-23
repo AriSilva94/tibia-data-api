@@ -185,6 +185,7 @@ model HighscoreSnapshot {
   id            Int      @id @default(autoincrement())
   world         String
   category      String
+  snapshotDate  String
   page          Int
   rank          Int
   characterName String
@@ -193,6 +194,7 @@ model HighscoreSnapshot {
   collectedAt   DateTime @default(now())
   createdAt     DateTime @default(now())
 
+  @@unique([world, category, rank, snapshotDate])
   @@index([world])
   @@index([collectedAt])
   @@map("highscores_snapshots")

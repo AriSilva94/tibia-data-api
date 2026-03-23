@@ -4,6 +4,7 @@ import { CollectorModule } from '../collector/collector.module';
 import { DiscoveryModule } from '../discovery/discovery.module';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { WorldOnlineJob } from './jobs/world-online.job';
+import { HighscoresSyncJob } from './jobs/highscores-sync.job';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { WorldOnlineJob } from './jobs/world-online.job';
     DiscoveryModule,
     PrismaModule,
   ],
-  providers: [WorldOnlineJob],
+  providers: [WorldOnlineJob, HighscoresSyncJob],
 })
 export class SchedulerModule {}
