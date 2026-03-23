@@ -12,6 +12,10 @@ export const scheduleConfig = registerAs('schedule', () => ({
     process.env.CHARACTER_REFRESH_BATCH_SIZE ?? '100',
     10,
   ),
+  characterRefreshConcurrency: parseInt(
+    process.env.CHARACTER_REFRESH_CONCURRENCY ?? '3',
+    10,
+  ),
   dailyMetricsCron: process.env.DAILY_METRICS_CRON ?? '30 23 * * *',
   discoveryReconciliationCron:
     process.env.DISCOVERY_RECONCILIATION_CRON ?? '0 4 * * *',
