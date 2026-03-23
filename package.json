@@ -31,6 +31,7 @@
     "@prisma/adapter-libsql": "^7.5.0",
     "@prisma/client": "^7.5.0",
     "@types/passport-jwt": "^4.0.1",
+    "axios": "^1.13.6",
     "bcrypt": "^6.0.0",
     "cheerio": "^1.2.0",
     "class-transformer": "^0.5.1",
@@ -78,15 +79,22 @@
       "json",
       "ts"
     ],
-    "rootDir": "src",
+    "rootDir": ".",
+    "roots": [
+      "<rootDir>/src",
+      "<rootDir>/test/parsers"
+    ],
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "src/**/*.(t|j)s"
     ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/src/$1"
+    }
   }
 }

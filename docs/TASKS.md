@@ -52,11 +52,11 @@
 
 | ID | Title | Size | Status | Depends on |
 |----|-------|------|--------|------------|
-| [TASK-13](tasks/TASK-13.md) | Tibia HTTP Client Service | M | Todo | TASK-03, TASK-04 |
-| [TASK-14](tasks/TASK-14.md) | Rate Limit & Concurrency Service | S | Todo | TASK-13 |
-| [TASK-15](tasks/TASK-15.md) | Parser — Online World List | M | Todo | TASK-13 |
-| [TASK-16](tasks/TASK-16.md) | Parser — Highscores | M | Todo | TASK-13 |
-| [TASK-17](tasks/TASK-17.md) | Parser — Character Profile & Deaths | M | Todo | TASK-13 |
+| [TASK-13](tasks/TASK-13.md) | Tibia HTTP Client Service | M | Done | TASK-03, TASK-04 |
+| [TASK-14](tasks/TASK-14.md) | Rate Limit & Concurrency Service | S | Done | TASK-13 |
+| [TASK-15](tasks/TASK-15.md) | Parser — Online World List | M | Done | TASK-13 |
+| [TASK-16](tasks/TASK-16.md) | Parser — Highscores | M | Done | TASK-13 |
+| [TASK-17](tasks/TASK-17.md) | Parser — Character Profile & Deaths | M | Done | TASK-13 |
 
 ### E5 — Discovery System
 
