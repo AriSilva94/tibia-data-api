@@ -4,7 +4,7 @@
 |-------|-------|
 | Epic | E4 — Collector Layer |
 | Size | M |
-| Status | Todo |
+| Status | Done |
 | Depends on | TASK-13 |
 
 ---
