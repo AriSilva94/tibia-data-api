@@ -4,10 +4,11 @@ type ConcurrentFn = <T>(fn: () => Promise<T>) => Promise<T>;
 
 type RateLimitState = 'normal' | 'backoff' | 'blocked';
 
-const DEFAULT_CONCURRENCY = 3;
-const MAX_CONCURRENCY = 5;
+const DEFAULT_CONCURRENCY = 10;
+const MAX_CONCURRENCY = 15;
 const MIN_CONCURRENCY = 1;
 const DEFAULT_DELAY_MS = 500;
+const DEFAULT_JITTER_MS = 300; // random 0–300ms added to every delay — avg ~650ms total
 const BACKOFF_DELAY_MS = 3000;
 // Both constants must match: blockedUntil timestamp and the recovery timer must expire at the same time
 const BLOCK_DURATION_MS = 15 * 60 * 1000; // 15 minutes
@@ -139,7 +140,8 @@ export class TibiaRateLimitService {
   }
 
   getDelayMs(): number {
-    return this.currentDelayMs;
+    const jitter = Math.floor(Math.random() * DEFAULT_JITTER_MS);
+    return this.currentDelayMs + jitter;
   }
 
   getStatus(): RateLimitStatus {

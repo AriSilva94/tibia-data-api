@@ -61,13 +61,14 @@
       "name": "Worlds",
       "item": [
         {
-          "name": "List Worlds",
+          "name": "List All Worlds",
           "request": {
             "method": "GET",
             "header": [
               { "key": "Authorization", "value": "Bearer {{token}}" }
             ],
-            "url": "{{baseUrl}}/worlds"
+            "url": "{{baseUrl}}/worlds",
+            "description": "Returns all Tibia worlds synced from the official worlds list. isTracked=true means the world is actively monitored."
           }
         },
         {
@@ -112,6 +113,23 @@
                 { "key": "world", "value": "Calmera", "disabled": true },
                 { "key": "name", "value": "", "disabled": true },
                 { "key": "isOnline", "value": "true", "disabled": true }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Characters by World (names only)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/characters/by-world",
+              "host": ["{{baseUrl}}"],
+              "path": ["characters", "by-world"],
+              "query": [
+                { "key": "world", "value": "Calmera", "disabled": true }
               ]
             }
           }

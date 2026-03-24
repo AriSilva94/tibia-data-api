@@ -7,16 +7,11 @@ export class WorldsController {
 
   @Get()
   findAll() {
-    return this.worldsService.findAllTracked();
+    return this.worldsService.findAll();
   }
 
   @Get(':name')
   findOne(@Param('name') name: string) {
     return this.worldsService.findByName(name);
-  }
-
-  @Get(':name/online')
-  getOnline(@Param('name') name: string) {
-    return this.worldsService.getOnlineSnapshot(name);
   }
 }
